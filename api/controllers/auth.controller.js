@@ -1,5 +1,6 @@
 import User from '../models/user.model.js'
 import bcryptjs from 'bcryptjs';
+import { errorHandler } from '../utils/error.js';
 export const signup = async(req,res,next)=>{
     const {username,email,password} = req.body
     if (
@@ -10,18 +11,11 @@ export const signup = async(req,res,next)=>{
         email === '' ||
         password === ''
       ){
-       return res.json("All fields required");
+      next(errorHandler(400,"All fields are required"))
       }
       const userExist = await User.findOne({username});
        
-        if (userExist) {
-            return res.status(400).json({ error: "Username already exists" });
-        }
-        const EmailExist = await User.findOne({email});
-       
-        if (EmailExist) {
-            return res.status(400).json({ error: "Email already exists" });
-        }
+        
 
         const hashedPassword = await bcryptjs.hash(password,10);
         const newUser = new User({
