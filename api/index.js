@@ -8,8 +8,8 @@ dotenv.config();
 
 
 const app = express();
-app.use(express.json())
-app.use('/api/user',userRoutes)
+app.use(express.json());
+app.use('/api/user',userRoutes);
 app.use('/api/auth', authRoutes);
 const port = 3000;
 
