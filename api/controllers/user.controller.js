@@ -16,7 +16,7 @@ export const updateUser =async (req,res,next)=>{
         }
         req.body.password = bcryptjs.hashSync(req.body.password, 10);
       }
-      console.log(req.body.username.length);
+      
       
       if (req.body.username) {
         if (req.body.username.length < 7 || req.body.username.length > 20) {
