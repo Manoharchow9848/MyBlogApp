@@ -118,7 +118,23 @@ const DashProfile = () => {
       setUpdateUserError(error.message);
     }
   };
-  console.log(formData);
+  const handleDeleteUser = async () => {
+    setShowModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
   
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
@@ -246,7 +262,7 @@ const DashProfile = () => {
             Are you sure you want to delete your account?
           </h3>
           <div className='flex justify-center gap-4'>
-            <Button color='failure'>
+            <Button color='failure' onClick={handleDeleteUser}>
               Yes, I'm sure
             </Button>
             <Button color='gray' onClick={() => setShowModal(false)}>
