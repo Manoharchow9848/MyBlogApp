@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.route.js'
 import connectdb from './db/mongodb.js';
+import postRoutes from './routes/post.route.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/api/user',userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/post', postRoutes);
 const port = 3000;
 
 connectdb().then(()=>{
