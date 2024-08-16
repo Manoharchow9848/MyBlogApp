@@ -73,6 +73,7 @@ export default function CreatePost() {
         setPublishError(data.message);
         return;
       }
+      
 
       if (res.ok) {
         setPublishError(null);
@@ -81,7 +82,7 @@ export default function CreatePost() {
     } catch (error) {
       setPublishError('Something went wrong');
     }
-    
+
   };
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
