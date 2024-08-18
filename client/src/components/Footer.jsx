@@ -22,7 +22,7 @@ export default function FooterCom() {
               <Footer.Title title='About' />
               <Footer.LinkGroup col>
                 <Footer.Link
-                  href=''
+                  href='https://chatterzone-mc.onrender.com/'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
