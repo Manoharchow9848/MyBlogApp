@@ -6,10 +6,11 @@ import connectdb from './db/mongodb.js';
 import postRoutes from './routes/post.route.js';
 import cookieParser from 'cookie-parser';
 import commentRoutes from './routes/comment.route.js';
+import path from 'path';
 dotenv.config();
 
 
-
+const __dirname = path.resolve();
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
@@ -17,6 +18,12 @@ app.use('/api/user',userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 const port = 3000;
 
 connectdb().then(()=>{
