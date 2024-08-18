@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.route.js'
 import connectdb from './db/mongodb.js';
 import postRoutes from './routes/post.route.js';
 import cookieParser from 'cookie-parser';
+import commentRoutes from './routes/comment.route.js';
 dotenv.config();
 
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/api/user',userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/comment', commentRoutes);
 const port = 3000;
 
 connectdb().then(()=>{

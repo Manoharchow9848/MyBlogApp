@@ -16,18 +16,15 @@ export default function Header() {
   const { theme } = useSelector((state) => state.theme);
   const [searchTerm, setSearchTerm] = useState('');
 
-  
-
-  
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set('searchTerm', searchTerm);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
-  };
-  const handleSignout = async()=>{
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const handleSignout = async () => {
     try {
       const res = await fetch('/api/user/signout', {
         method: 'POST',
@@ -41,7 +38,15 @@ export default function Header() {
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
 
   return (
     <Navbar className='border-b-2'>
@@ -79,7 +84,7 @@ export default function Header() {
             arrowIcon={false}
             inline
             label={
-              <Avatar img={currentUser.profilePicture} alt='user' rounded />
+              <Avatar alt='user' img={currentUser.profilePicture} rounded />
             }
           >
             <Dropdown.Header>
@@ -92,7 +97,7 @@ export default function Header() {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={handleSignout} >Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to='/sign-in'>

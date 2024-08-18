@@ -14,6 +14,8 @@ import { useSelector } from 'react-redux';
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute'
 import Protect from './components/Protect'
 import UpdatePost from './pages/UpdatePost'
+import PostPage from './pages/PostPage'
+import Search from './pages/Search'
 export default function App() {
   const { currentUser } = useSelector((state) => state.user);
 
@@ -25,13 +27,14 @@ export default function App() {
 
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        
+        <Route path='/search' element={<Search />} />
         <Route element={<Protect />}>
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         </Route>
         
         <Route path='/projects' element={<Projects />} />
+        <Route path='/post/:postSlug' element={<PostPage />} />
 
         <Route element={<PrivateRoute />}>
         <Route path='/dashboard' element={<DashBoard />} />      
