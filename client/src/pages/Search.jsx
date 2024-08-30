@@ -14,7 +14,7 @@ export default function Search() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showMore, setShowMore] = useState(false);
-
+  
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -70,13 +70,7 @@ export default function Search() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set('searchTerm', sidebarData.searchTerm);
-    urlParams.set('sort', sidebarData.sort);
-    urlParams.set('category', sidebarData.category);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+        
   };
 
   const handleShowMore = async () => {

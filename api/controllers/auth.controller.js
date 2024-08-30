@@ -15,7 +15,7 @@ export const signup = async(req,res,next)=>{
       ){
       next(errorHandler(400,"All fields are required"))
       }
-      const userExist = await User.findOne({username});
+     
        
         
 
